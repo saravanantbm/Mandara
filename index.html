@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mandara — Daily electrolyte replenishment, made for India</title>
+<meta name="description" content="Mandara is a dissolvable, zero-sugar electrolyte cube built for how India sweats, works and hydrates. One cube. One bottle. Full replenishment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;0,9..144,680;1,9..144,500;1,9..144,600&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ocean-950:#071E23;
+    --ocean-900:#0B2E35;
+    --ocean-800:#0F3941;
+    --ocean-700:#12454F;
+    --ocean-500:#1C6672;
+    --aqua-400:#52D6C9;
+    --aqua-300:#9BE8DD;
+    --gold-500:#D6A94A;
+    --gold-300:#EAC77B;
+    --foam-50:#EEF5F3;
+    --foam-100:#E4EEEB;
+    --ink-900:#0E1A18;
+    --ink-600:#425350;
+    --ink-400:#6C7C79;
+    --line:rgba(14,26,24,0.12);
+    --line-dark:rgba(238,245,243,0.14);
+
+    --font-display:'Fraunces', serif;
+    --font-body:'Work Sans', -apple-system, sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+
+    --max:1180px;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--font-body);
+    background:var(--foam-50);
+    color:var(--ink-900);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit;}
+  .mdr-wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  h1,h2,h3{font-family:var(--font-display); margin:0; line-height:1.05; font-weight:600;}
+  p{margin:0;}
+  .mdr-eyebrow{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--aqua-400);
+    display:flex; align-items:center; gap:10px;
+  }
+  .mdr-eyebrow::before{content:""; width:22px; height:1px; background:currentColor; display:inline-block;}
+  .mdr-eyebrow.dark{color:var(--ocean-700);}
+  .mdr-eyebrow.dark::before{background:var(--gold-500);}
+
+  :focus-visible{outline:2px solid var(--gold-500); outline-offset:3px;}
+
+  /* ---------- NAV ---------- */
+  .mdr-nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(7,30,35,0.72);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .mdr-nav-inner{
+    max-width:var(--max); margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .mdr-logo{
+    font-family:var(--font-display); font-weight:600; font-size:20px;
+    letter-spacing:.02em; color:var(--foam-50); text-decoration:none;
+  }
+  .mdr-logo em{font-style:italic; color:var(--gold-300);}
+  .mdr-navlinks{display:flex; gap:32px; list-style:none; margin:0; padding:0;}
+  .mdr-navlinks a{
+    color:var(--foam-100); text-decoration:none; font-size:14px; font-weight:500;
+    opacity:.82; transition:opacity .2s;
+  }
+  .mdr-navlinks a:hover{opacity:1;}
+  .mdr-navlinks{align-items:center;}
+  .mdr-cta{
+    font-family:var(--font-body); font-weight:600; font-size:14px;
+    background:var(--aqua-400); color:var(--ocean-950);
+    padding:10px 18px; border-radius:100px; text-decoration:none;
+    border:1px solid transparent; transition:transform .2s ease, background .2s ease;
+  }
+  .mdr-cta:hover{background:var(--aqua-300); transform:translateY(-1px);}
+  .mdr-navtoggle{display:none;}
+
+  @media(max-width:820px){
+    .mdr-navlinks .mdr-link{display:none;}
+    .mdr-navlinks{gap:14px;}
+  }
+
+  /* ---------- HERO ---------- */
+  .mdr-hero{
+    position:relative;
+    min-height:100svh;
+    background:radial-gradient(120% 100% at 50% 0%, var(--ocean-800) 0%, var(--ocean-950) 62%);
+    color:var(--foam-50);
+    display:flex; align-items:center;
+    padding:150px 0 90px;
+    overflow:hidden;
+  }
+  .mdr-rings{
+    position:absolute; top:50%; left:50%; width:min(1100px,150vw); height:min(1100px,150vw);
+    transform:translate(-50%,-50%);
+    opacity:.55;
+    pointer-events:none;
+  }
+  .mdr-rings circle{fill:none; stroke:var(--aqua-400); stroke-opacity:.28;}
+  .mdr-rings .r2{stroke:var(--gold-500); stroke-opacity:.22;}
+  .mdr-ring-spin{transform-origin:center; animation:mdrspin 90s linear infinite;}
+  .mdr-ring-spin.rev{animation-direction:reverse; animation-duration:130s;}
+  @keyframes mdrspin{to{transform:rotate(360deg);}}
+
+  .mdr-hero-inner{position:relative; z-index:2; max-width:760px;}
+  .mdr-hero h1{
+    font-size:clamp(38px,6vw,68px);
+    margin:22px 0 24px;
+    letter-spacing:-0.01em;
+  }
+  .mdr-hero h1 em{font-style:italic; font-weight:500; color:var(--aqua-300);}
+  .mdr-hero p.mdr-sub{
+    font-size:18px; line-height:1.6; color:var(--foam-100); opacity:.88;
+    max-width:540px; margin-bottom:38px;
+  }
+  .mdr-hero-ctas{display:flex; gap:16px; flex-wrap:wrap;}
+  .mdr-ghost{
+    font-family:var(--font-body); font-weight:600; font-size:14px;
+    color:var(--foam-50); text-decoration:none;
+    padding:12px 22px; border-radius:100px; border:1px solid var(--line-dark);
+    transition:border-color .2s, background .2s;
+  }
+  .mdr-ghost:hover{border-color:var(--aqua-400); background:rgba(82,214,201,.08);}
+  .mdr-hero .mdr-cta{padding:13px 24px; font-size:14px;}
+
+  /* stat ticker */
+  .mdr-ticker{
+    border-top:1px solid var(--line-dark); border-bottom:1px solid var(--line-dark);
+    background:var(--ocean-900); color:var(--foam-50);
+  }
+  .mdr-ticker-inner{
+    max-width:var(--max); margin:0 auto; padding:28px 28px;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  }
+  .mdr-tick{border-left:1px solid var(--line-dark); padding-left:20px;}
+  .mdr-tick:first-child{border-left:none; padding-left:0;}
+  .mdr-tick .num{font-family:var(--font-mono); font-size:clamp(22px,3vw,32px); color:var(--gold-300);}
+  .mdr-tick .lbl{font-size:13px; color:var(--foam-100); opacity:.75; margin-top:4px;}
+  @media(max-width:700px){
+    .mdr-ticker-inner{grid-template-columns:1fr; gap:16px;}
+    .mdr-tick{border-left:none; border-top:1px solid var(--line-dark); padding:16px 0 0;}
+    .mdr-tick:first-child{border-top:none; padding-top:0;}
+  }
+
+  /* ---------- SECTION GENERIC ---------- */
+  .mdr-section{padding:110px 0;}
+  .mdr-section.tight{padding:90px 0;}
+  .mdr-head{max-width:640px; margin-bottom:56px;}
+  .mdr-head h2{font-size:clamp(28px,4vw,42px); margin-top:16px; color:var(--ocean-950);}
+  .mdr-head p{margin-top:16px; font-size:17px; line-height:1.65; color:var(--ink-600);}
+
+  /* ---------- PROBLEM ---------- */
+  .mdr-problem{background:var(--foam-50);}
+  .mdr-cardgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .mdr-stat-card{
+    background:#fff; border:1px solid var(--line); border-radius:18px;
+    padding:30px 26px;
+  }
+  .mdr-stat-card .num{font-family:var(--font-mono); font-size:34px; color:var(--ocean-700);}
+  .mdr-stat-card .desc{margin-top:10px; font-size:14.5px; color:var(--ink-600); line-height:1.55;}
+  @media(max-width:820px){.mdr-cardgrid{grid-template-columns:1fr;}}
+
+  /* ---------- PRODUCT ---------- */
+  .mdr-product{background:var(--ocean-950); color:var(--foam-50);}
+  .mdr-product .mdr-eyebrow{color:var(--aqua-400);}
+  .mdr-product .mdr-head h2{color:var(--foam-50);}
+  .mdr-product .mdr-head p{color:var(--foam-100); opacity:.82;}
+
+  .mdr-dissolve{
+    display:flex; align-items:center; justify-content:center;
+    height:220px; position:relative; margin-bottom:60px;
+  }
+  .mdr-cube{
+    width:46px; height:46px; background:linear-gradient(145deg,var(--gold-300),var(--gold-500));
+    border-radius:6px; position:relative; z-index:2;
+    box-shadow:0 10px 30px rgba(214,169,74,.35);
+    transition:transform .8s ease;
+  }
+  .mdr-dot{
+    position:absolute; width:5px; height:5px; border-radius:50%;
+    background:var(--aqua-400); opacity:0; z-index:1;
+  }
+  .mdr-dissolve.in-view .mdr-cube{ animation:mdrfloat 3.5s ease-in-out infinite; }
+  @keyframes mdrfloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+  .mdr-dissolve.in-view .mdr-dot{ animation:mdrpop 2.6s ease-out infinite; }
+  @keyframes mdrpop{
+    0%{opacity:0; transform:translate(0,0) scale(.4);}
+    15%{opacity:.9;}
+    100%{opacity:0; transform:var(--travel) scale(1);}
+  }
+
+  .mdr-skugrid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .mdr-sku{
+    background:var(--ocean-900); border:1px solid var(--line-dark); border-radius:20px;
+    padding:32px 28px; display:flex; flex-direction:column; gap:14px;
+  }
+  .mdr-sku .price{font-family:var(--font-mono); color:var(--gold-300); font-size:15px;}
+  .mdr-sku h3{font-size:22px; font-weight:500; font-style:italic;}
+  .mdr-sku .who{font-size:12.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--aqua-300); opacity:.85;}
+  .mdr-sku p{font-size:14.5px; line-height:1.6; color:var(--foam-100); opacity:.85;}
+  .mdr-sku .fine{font-size:11.5px; color:var(--foam-100); opacity:.5; margin-top:auto;}
+  @media(max-width:900px){.mdr-skugrid{grid-template-columns:1fr;}}
+
+  /* ---------- SCIENCE ---------- */
+  .mdr-science{background:var(--foam-50);}
+  .mdr-sci-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:start;}
+  @media(max-width:900px){.mdr-sci-grid{grid-template-columns:1fr;}}
+
+  table.mdr-table{width:100%; border-collapse:collapse; font-size:14px;}
+  table.mdr-table th, table.mdr-table td{
+    text-align:left; padding:14px 12px; border-bottom:1px solid var(--line);
+  }
+  table.mdr-table th{
+    font-family:var(--font-mono); font-size:11.5px; text-transform:uppercase;
+    letter-spacing:.06em; color:var(--ink-400); font-weight:500;
+  }
+  table.mdr-table td.brand{font-weight:600; color:var(--ocean-800);}
+  table.mdr-table tr:last-child td{border-bottom:none;}
+  .yes{color:var(--ocean-500); font-weight:600;}
+  .no{color:#B4453A;}
+
+  .mdr-gauge{
+    background:#fff; border:1px solid var(--line); border-radius:18px; padding:28px;
+  }
+  .mdr-gauge h4{
+    font-family:var(--font-body); font-size:13px; text-transform:uppercase;
+    letter-spacing:.06em; color:var(--ink-400); margin-bottom:20px; font-weight:600;
+  }
+  .mdr-bar{
+    position:relative; height:14px; border-radius:100px; margin:18px 0 10px;
+    background:linear-gradient(90deg,#CFE9E5 0%, #CFE9E5 40%, var(--aqua-400) 40%, var(--aqua-400) 60%, #E8DCC4 60%, #E8DCC4 100%);
+  }
+  .mdr-marker{
+    position:absolute; top:-8px; width:2px; height:30px; background:var(--ocean-950);
+  }
+  .mdr-marker span{
+    position:absolute; top:-22px; left:50%; transform:translateX(-50%);
+    font-family:var(--font-mono); font-size:11px; white-space:nowrap; color:var(--ocean-950);
+  }
+  .mdr-scale{display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:11px; color:var(--ink-400);}
+
+  /* ---------- STORY ---------- */
+  .mdr-story{background:var(--ocean-900); color:var(--foam-50);}
+  .mdr-story-inner{max-width:720px; margin:0 auto; text-align:center;}
+  .mdr-story .mdr-eyebrow{justify-content:center; color:var(--aqua-400);}
+  .mdr-story h2{font-size:clamp(26px,3.6vw,38px); margin:18px 0 22px; font-weight:500; font-style:italic; color:var(--gold-300);}
+  .mdr-story p{font-size:16.5px; line-height:1.75; color:var(--foam-100); opacity:.88;}
+  .mdr-story p + p{margin-top:16px;}
+
+  /* ---------- CHURN WIDGET ---------- */
+  .mdr-churn{width:112px; height:112px; margin-bottom:18px;}
+  .mdr-churn .mountain{
+    transform-origin:56px 86px;
+    animation:mdrBob 3.6s ease-in-out infinite;
+  }
+  @keyframes mdrBob{0%,100%{transform:translateY(0);}50%{transform:translateY(-2.5px);}}
+  .mdr-churn .coil{
+    stroke-dasharray:5 4.5;
+    animation:mdrCoilFlow 2.2s linear infinite;
+  }
+  @keyframes mdrCoilFlow{to{stroke-dashoffset:-38;}}
+  .mdr-churn .ripple{
+    transform-origin:56px 86px; opacity:0;
+    animation:mdrRippleScale 3.2s ease-out infinite;
+  }
+  .mdr-churn .ripple.r2{animation-delay:1.1s;}
+  .mdr-churn .ripple.r3{animation-delay:2.2s;}
+  @keyframes mdrRippleScale{
+    0%{transform:scale(.35); opacity:.6;}
+    100%{transform:scale(1.7); opacity:0;}
+  }
+  .mdr-churn .bubble{animation:mdrBubble 2.8s ease-in infinite; opacity:0;}
+  @keyframes mdrBubble{
+    0%{transform:translateY(0); opacity:0;}
+    15%{opacity:.95;}
+    100%{transform:translateY(-38px); opacity:0;}
+  }
+
+  /* ---------- JOIN ---------- */
+  .mdr-join{background:var(--foam-50);}
+  .mdr-join-box{
+    background:var(--ocean-950); border-radius:24px; padding:60px 48px;
+    color:var(--foam-50); display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center;
+    position:relative; overflow:hidden;
+  }
+  .mdr-join-box::after{
+    content:""; position:absolute; right:-60px; top:-60px; width:220px; height:220px;
+    border-radius:50%; border:1px solid var(--line-dark);
+  }
+  .mdr-join-box h2{font-size:clamp(26px,3.4vw,36px); color:var(--foam-50);}
+  .mdr-join-box p{color:var(--foam-100); opacity:.85; margin-top:14px; font-size:15.5px; line-height:1.6;}
+  @media(max-width:820px){.mdr-join-box{grid-template-columns:1fr; padding:40px 28px;}}
+
+  .mdr-form{display:flex; gap:10px; flex-wrap:wrap;}
+  .mdr-form input[type=email]{
+    flex:1; min-width:200px; padding:14px 16px; border-radius:100px;
+    border:1px solid var(--line-dark); background:rgba(255,255,255,.06); color:var(--foam-50);
+    font-family:var(--font-body); font-size:14px;
+  }
+  .mdr-form input[type=email]::placeholder{color:var(--foam-100); opacity:.5;}
+  .mdr-form button{
+    font-family:var(--font-body); font-weight:600; font-size:14px;
+    background:var(--gold-500); color:var(--ocean-950); border:none;
+    padding:14px 22px; border-radius:100px; cursor:pointer; transition:background .2s;
+  }
+  .mdr-form button:hover{background:var(--gold-300);}
+  .mdr-form-note{font-size:12px; color:var(--foam-100); opacity:.55; margin-top:12px;}
+  .mdr-thanks{display:none; font-size:14.5px; color:var(--aqua-300);}
+
+  /* ---------- FOOTER ---------- */
+  .mdr-footer{background:var(--ocean-950); color:var(--foam-100); padding:50px 0 30px;}
+  .mdr-footer-top{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px;
+    padding-bottom:30px; border-bottom:1px solid var(--line-dark);
+  }
+  .mdr-footer-links{display:flex; gap:26px; list-style:none; padding:0; margin:0; font-size:14px;}
+  .mdr-footer-links a{text-decoration:none; opacity:.8;}
+  .mdr-footer-links a:hover{opacity:1;}
+  .mdr-sources{font-size:11.5px; opacity:.45; line-height:1.7; max-width:760px; margin-top:24px;}
+  .mdr-legal{display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-top:24px; font-size:12px; opacity:.5;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .mdr-ring-spin, .mdr-dissolve.in-view .mdr-cube, .mdr-dissolve.in-view .mdr-dot,
+    .mdr-churn .mountain, .mdr-churn .coil, .mdr-churn .ripple, .mdr-churn .bubble{animation:none !important; opacity:1;}
+  }
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in-view{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<nav class="mdr-nav">
+  <div class="mdr-nav-inner">
+    <a href="#hero" class="mdr-logo">MAND<em>A</em>RA</a>
+    <ul class="mdr-navlinks">
+      <li class="mdr-link"><a href="#product">Product</a></li>
+      <li class="mdr-link"><a href="#science">Science</a></li>
+      <li class="mdr-link"><a href="#story">Why Mandara</a></li>
+      <li><a href="#join" class="mdr-cta">Join the waitlist</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="mdr-hero" id="hero">
+  <svg class="mdr-rings" viewBox="0 0 600 600" aria-hidden="true">
+    <g class="mdr-ring-spin">
+      <circle class="r1" cx="300" cy="300" r="180" stroke-width="1"/>
+      <circle class="r1" cx="300" cy="300" r="140" stroke-width="1"/>
+    </g>
+    <g class="mdr-ring-spin rev">
+      <circle class="r2" cx="300" cy="300" r="230" stroke-width="1" stroke-dasharray="2 10"/>
+      <circle class="r2" cx="300" cy="300" r="270" stroke-width="1"/>
+    </g>
+  </svg>
+  <div class="mdr-wrap mdr-hero-inner">
+    <span class="mdr-eyebrow">BYMANDARA.COM &nbsp;·&nbsp; THE CHURN HAS STARTED — SHIPPING SOON</span>
+    <h1>Named for the mountain<br>that <em>churned</em> the ocean into nectar.</h1>
+    <p class="mdr-sub">Mandara is a dissolvable, zero-sugar electrolyte cube — built for the heat, the water, and the working days of India. One cube. One bottle. Full replenishment.</p>
+    <div class="mdr-hero-ctas">
+      <a href="#join" class="mdr-cta">Join the waitlist</a>
+      <a href="#science" class="mdr-ghost">See the science</a>
+    </div>
+  </div>
+</header>
+
+<div class="mdr-ticker">
+  <div class="mdr-ticker-inner">
+    <div class="mdr-tick"><div class="num">380M</div><div class="lbl">outdoor workers losing electrolytes to heat every day</div></div>
+    <div class="mdr-tick"><div class="num">101M</div><div class="lbl">Indian diabetics with no sugar-free hydration option</div></div>
+    <div class="mdr-tick"><div class="num">4%</div><div class="lbl">of Indian households receive tap water they trust</div></div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="mdr-section mdr-problem" id="problem">
+  <div class="mdr-wrap">
+    <div class="mdr-head reveal">
+      <span class="mdr-eyebrow dark">THE PROBLEM</span>
+      <h2>Water alone isn't enough.</h2>
+      <p>Between the heat, the chai habit, and water most people don't fully trust, a huge share of India runs a quiet electrolyte deficit every single day — and the products built to fix it are either medicalised, imported, sugar-loaded, or all three.</p>
+    </div>
+    <div class="mdr-cardgrid">
+      <div class="mdr-stat-card reveal">
+        <div class="num">35–50°C</div>
+        <div class="desc">Summer temperatures across most of India drive daily sodium, potassium and magnesium loss in sweat — for anyone working outdoors, not just athletes.</div>
+      </div>
+      <div class="mdr-stat-card reveal">
+        <div class="num">₹80–400</div>
+        <div class="desc">What a serve of imported electrolyte drinks costs. Structurally unaffordable for the workers who need it most, every day.</div>
+      </div>
+      <div class="mdr-stat-card reveal">
+        <div class="num">0g</div>
+        <div class="desc">Added sugar in every Mandara cube — so it's not off-limits for the 101 million Indians managing diabetes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<section class="mdr-section mdr-product" id="product">
+  <div class="mdr-wrap">
+    <div class="mdr-head reveal">
+      <span class="mdr-eyebrow">THE PRODUCT</span>
+      <h2>One cube. One bottle. Full replenishment.</h2>
+      <p>Drop it, watch it dissolve, drink it. No mixing guesswork, no cold chain, no sachet mess — just a compressed cube calibrated for a standard 500ml bottle.</p>
+    </div>
+
+    <div class="mdr-dissolve reveal" id="dissolveWidget">
+      <div class="mdr-cube" aria-hidden="true"></div>
+      <div class="mdr-dot" style="--travel:translate(60px,-40px)"></div>
+      <div class="mdr-dot" style="--travel:translate(-70px,-20px); animation-delay:.3s;"></div>
+      <div class="mdr-dot" style="--travel:translate(40px,50px); animation-delay:.6s;"></div>
+      <div class="mdr-dot" style="--travel:translate(-50px,45px); animation-delay:.9s;"></div>
+      <div class="mdr-dot" style="--travel:translate(90px,10px); animation-delay:1.2s;"></div>
+      <div class="mdr-dot" style="--travel:translate(-90px,15px); animation-delay:1.5s;"></div>
+    </div>
+
+    <div class="mdr-skugrid">
+      <div class="mdr-sku reveal">
+        <span class="price">₹15 / cube</span>
+        <h3>Mandara Mass</h3>
+        <span class="who">Kirana · outdoor & manual work</span>
+        <p>The everyday cube — sodium, potassium, magnesium and zinc, dissolved in 500ml. Built to sit on the same counter as chai.</p>
+      </div>
+      <div class="mdr-sku reveal">
+        <span class="price">₹40–50 / cube</span>
+        <h3>Mandara Clinical</h3>
+        <span class="who">Pharmacy · zero-glucose</span>
+        <p>Zero-glucose formulation with added D3 and K2, for people watching their blood sugar who still want to hydrate properly.</p>
+        <span class="fine">Not a medical treatment. Consult your doctor for condition-specific advice.</span>
+      </div>
+      <div class="mdr-sku reveal">
+        <span class="price">₹55–70 / cube</span>
+        <h3>Mandara Wellness</h3>
+        <span class="who">D2C · office & everyday</span>
+        <p>The same electrolyte base plus ashwagandha, tulsi and ginger — for the 3pm slump that isn't really about sleep.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCIENCE -->
+<section class="mdr-section mdr-science" id="science">
+  <div class="mdr-wrap">
+    <div class="mdr-head reveal">
+      <span class="mdr-eyebrow dark">THE SCIENCE</span>
+      <h2>Formulated as a hydration problem, not a flavour problem.</h2>
+      <p>Most Indian electrolyte products skip magnesium and lean on sugar to carry the taste. We built from the opposite direction.</p>
+    </div>
+    <div class="mdr-sci-grid">
+      <div class="reveal">
+        <table class="mdr-table">
+          <thead>
+            <tr><th>Formulation</th><th>Mandara</th><th>ORS sachet</th><th>Sports drink</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="brand">Added sugar</td><td class="no">None</td><td class="no">High</td><td class="no">Very high</td></tr>
+            <tr><td class="brand">Magnesium</td><td class="yes">Included</td><td class="no">Absent</td><td class="no">Absent</td></tr>
+            <tr><td class="brand">Cold chain</td><td class="yes">Not required</td><td class="yes">Not required</td><td class="no">Often required</td></tr>
+            <tr><td class="brand">Price / serve</td><td class="yes">₹15–70</td><td class="yes">₹5–10</td><td class="no">₹80–150</td></tr>
+            <tr><td class="brand">Daily-use fit</td><td class="yes">Designed for it</td><td class="no">"Sick drink" image</td><td class="no">Sport occasion only</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="reveal">
+        <div class="mdr-gauge">
+          <h4>Osmolarity — where Mandara sits</h4>
+          <div class="mdr-bar">
+            <div class="mdr-marker" style="left:50%;"><span>Mandara<br>220–240</span></div>
+          </div>
+          <div class="mdr-scale">
+            <span>Hypotonic</span><span>Isotonic</span><span>Hypertonic</span>
+          </div>
+          <p style="margin-top:22px; font-size:13.5px; color:var(--ink-600); line-height:1.6;">
+            Blood plasma sits near 290 mOsm/L. A lower, hypotonic solution is absorbed faster from the gut — useful for people rehydrating across a whole working day, not a single sprint.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="mdr-section tight mdr-story" id="story">
+  <div class="mdr-wrap mdr-story-inner">
+    <span class="mdr-eyebrow">WHY "MANDARA"</span>
+    <h2>"Churn the ocean, and it will give you what you need."</h2>
+    <p>In the old story, gods and demons wound a serpent around Mount Mandara and used it to churn the ocean of milk — patiently, together, through the difficult parts — until it yielded amrita, the nectar of life.</p>
+    <p>We kept the name because the mechanic matches the myth: something solid, turned in water, giving back exactly what the body was missing. No mountain required — just a cube and a bottle.</p>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section class="mdr-section mdr-join" id="join">
+  <div class="mdr-wrap">
+    <div class="mdr-join-box reveal">
+      <div>
+        <svg class="mdr-churn" viewBox="0 0 112 112" aria-hidden="true">
+          <defs>
+            <linearGradient id="mdrPeakGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="var(--gold-300)"/>
+              <stop offset="100%" stop-color="var(--gold-500)"/>
+            </linearGradient>
+          </defs>
+          <circle class="ripple r1" cx="56" cy="86" r="24" fill="none" stroke="var(--aqua-400)" stroke-width="1.5"/>
+          <circle class="ripple r2" cx="56" cy="86" r="24" fill="none" stroke="var(--aqua-400)" stroke-width="1.5"/>
+          <circle class="ripple r3" cx="56" cy="86" r="24" fill="none" stroke="var(--gold-500)" stroke-width="1.5"/>
+          <g class="mountain">
+            <path d="M56,16 L70,46 L86,86 L26,86 L42,46 Z" fill="url(#mdrPeakGrad)"/>
+            <path d="M56,16 L61,28 L51,28 Z" fill="var(--foam-50)" opacity=".9"/>
+            <path class="coil" d="M38,32 C58,40 32,48 52,56 C68,63 34,70 54,78 C64,82 44,84 56,86"
+                  fill="none" stroke="var(--aqua-400)" stroke-width="2.2" stroke-linecap="round" opacity=".85"/>
+          </g>
+          <circle class="bubble" cx="46" cy="82" r="2" fill="var(--aqua-400)" style="animation-delay:0s"/>
+          <circle class="bubble" cx="66" cy="80" r="2.4" fill="var(--gold-300)" style="animation-delay:.9s"/>
+          <circle class="bubble" cx="56" cy="74" r="1.6" fill="var(--aqua-300)" style="animation-delay:1.7s"/>
+        </svg>
+        <span class="mdr-eyebrow">JOIN THE LIST</span>
+        <h2>We're churning right now.</h2>
+        <p>Formulation validation, sensory trials and regulatory filing are underway. Leave your email and you'll be the first to know the moment Mandara is ready to ship — no spam before that.</p>
+      </div>
+      <div>
+        <form class="mdr-form" id="waitlistForm">
+          <input type="email" required placeholder="you@email.com" aria-label="Email address" id="waitlistEmail">
+          <button type="submit">Notify me</button>
+        </form>
+        <p class="mdr-form-note">We'll only use this to tell you when Mandara launches.</p>
+        <p class="mdr-thanks" id="thanksMsg">You're on the list. Thank you for waiting with us.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="mdr-footer">
+  <div class="mdr-wrap">
+    <div class="mdr-footer-top">
+      <a href="#hero" class="mdr-logo">MAND<em>A</em>RA</a>
+      <ul class="mdr-footer-links">
+        <li><a href="#product">Product</a></li>
+        <li><a href="#science">Science</a></li>
+        <li><a href="#story">Why Mandara</a></li>
+        <li><a href="mailto:hello@bymandara.com">hello@bymandara.com</a></li>
+      </ul>
+    </div>
+    <div class="mdr-sources">
+      Figures cited: outdoor heat-exposed workforce and heatstroke data (NCDC / HeatWatch, 2025); diabetic population (International Diabetes Federation, 2024); household tap-water trust (LocalCircles National Survey, 2024); osmolarity reference (WHO, Oral Rehydration Salts: Production of the new ORS, 2006). Claims on this page describe product formulation and positioning only and are not medical claims. Mandara is not a treatment for any medical condition; consult a qualified physician for individual health guidance.
+    </div>
+    <div class="mdr-legal">
+      <span>© 2026 Mandara Pvt Ltd. All rights reserved.</span>
+      <span>Chennai, India · bymandara.com</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal, .mdr-dissolve');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:0.2});
+  revealEls.forEach(el=>io.observe(el));
+
+  // Waitlist form (static — wire to your email provider / backend)
+  const form = document.getElementById('waitlistForm');
+  const thanks = document.getElementById('thanksMsg');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const email = document.getElementById('waitlistEmail').value;
+    if(email){
+      form.style.display = 'none';
+      thanks.style.display = 'block';
+      // TODO: replace with a real submission call (e.g. to Google Sheets, Mailchimp, or your own API)
+      console.log('Waitlist signup:', email);
+    }
+  });
+</script>
+
+</body>
+</html>
